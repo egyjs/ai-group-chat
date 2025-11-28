@@ -89,13 +89,22 @@ export default function Home() {
     };
 
     return (
-        <div className="relative flex h-screen min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark font-sans">
-            <div className="flex h-full w-full">
+        <div className="relative flex min-h-screen w-full flex-col overflow-hidden bg-background-light text-text-primary-light dark:bg-background-dark dark:text-text-primary-dark">
+            <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.08]"
+                style={{
+                    backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
+
+            <div className="relative z-10 flex h-full w-full flex-col lg:flex-row">
                 {/* Sidebar */}
-                <aside className="flex h-full w-full max-w-sm flex-shrink-0 flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
-                    <div className="flex h-full flex-col">
+                <aside className="flex w-full flex-shrink-0 flex-col border-b border-border-light bg-surface-light/95 backdrop-blur lg:h-screen lg:max-w-md lg:border-b-0 lg:border-r dark:border-border-dark dark:bg-surface-dark/95">
+                    <div className="flex h-full flex-col gap-3 p-4">
                         {/* Search Header */}
-                        <div className="sticky top-0 z-10 p-4 bg-surface-light dark:bg-surface-dark/95 backdrop-blur-sm">
+                        <div className="sticky top-0 z-10 -mx-4 -mt-4 bg-surface-light/95 px-4 pb-3 pt-4 shadow-[0_4px_16px_-12px_rgba(0,0,0,0.35)] dark:bg-surface-dark/95">
                             <Input
                                 icon="search"
                                 placeholder="Search for people or rooms"
@@ -106,11 +115,13 @@ export default function Home() {
                         </div>
 
                         {/* Room List */}
-                        <div className="flex-1 overflow-y-auto px-3 pb-4 space-y-1">
+                        <div className="flex-1 overflow-y-auto px-1 pb-4 space-y-2">
                             {filteredRooms.length === 0 ? (
-                                <div className="mt-10 flex flex-col items-center justify-center p-6 text-center text-text-muted-light dark:text-text-muted-dark opacity-60">
-                                    <span className="material-symbols-outlined text-4xl mb-2">forum</span>
-                                    <p className="text-sm font-medium">{rooms.length === 0 ? 'Create a space to start chatting.' : 'No conversations found.'}</p>
+                                <div className="mt-8 flex flex-col items-center justify-center rounded-xl border border-dashed border-border-light px-4 py-8 text-center text-text-muted-light dark:border-border-dark dark:text-text-muted-dark">
+                                    <span className="material-symbols-outlined mb-3 text-4xl">forum</span>
+                                    <p className="text-sm font-medium">
+                                        {rooms.length === 0 ? 'Create a space to start chatting.' : 'No conversations found.'}
+                                    </p>
                                 </div>
                             ) : (
                                 filteredRooms.map((room) => {
@@ -120,9 +131,9 @@ export default function Home() {
                                             key={room.id}
                                             to={`/room/${room.id}`}
                                             className={`
-                                                group flex cursor-pointer items-center gap-3 rounded-xl p-3 transition-all duration-200
-                                                hover:bg-surface-hover dark:hover:bg-surface-hover-dark
-                                                ${unread ? 'bg-primary/5 dark:bg-primary/10' : ''}
+                                                group flex cursor-pointer items-center gap-3 rounded-xl p-3 transition-colors duration-150
+                                                hover:bg-surface-hover dark:hover:bg-surface-hover-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30
+                                                ${unread ? 'bg-primary/5 dark:bg-primary/10' : 'border border-transparent'}
                                             `}
                                         >
                                             <div className="relative shrink-0">
@@ -130,7 +141,7 @@ export default function Home() {
                                                     src={createAvatarUrl(room.name)}
                                                     alt={room.name}
                                                     size="lg"
-                                                    className="ring-2 ring-transparent group-hover:ring-border-light dark:group-hover:ring-border-dark transition-all"
+                                                    className="ring-2 ring-transparent transition-all group-hover:ring-border-light dark:group-hover:ring-border-dark"
                                                 />
                                                 {unread && (
                                                     <span className="absolute -right-0.5 -top-0.5 flex size-3.5">
@@ -160,7 +171,7 @@ export default function Home() {
                     </div>
 
                     {/* User Footer */}
-                    <div className="sticky bottom-0 z-10 border-t border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
+                    <div className="sticky bottom-0 z-10 border-t border-border-light bg-surface-light/95 p-4 backdrop-blur dark:border-border-dark dark:bg-surface-dark/95">
                         <div className="flex items-center justify-between gap-3">
                             <div className="flex items-center gap-3">
                                 <Avatar
@@ -203,7 +214,7 @@ export default function Home() {
                         {/* Create Room Form */}
                         {isCreating && (
                             <div className="mt-4 animate-slide-up">
-                                <Card className="p-4 bg-surface-hover/50 dark:bg-surface-hover-dark/50 backdrop-blur-sm border-primary/20">
+                                <Card className="border-primary/15 bg-surface-hover/60 dark:bg-surface-hover-dark/60">
                                     <form onSubmit={handleCreateRoom} className="space-y-3">
                                         <Input
                                             label="Room Name"
@@ -211,7 +222,7 @@ export default function Home() {
                                             value={newRoomName}
                                             onChange={(event) => setNewRoomName(event.target.value)}
                                             autoFocus
-                                            className="bg-surface-light dark:bg-surface-dark"
+                                            helperText="Give your space a clear, memorable name."
                                         />
                                         <Button
                                             type="submit"
@@ -230,26 +241,20 @@ export default function Home() {
                 </aside>
 
                 {/* Main Content Area */}
-                <main className="flex flex-1 overflow-hidden bg-background-light dark:bg-background-dark relative">
-                    {/* Background Pattern */}
-                    <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
-                        style={{
-                            backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)',
-                            backgroundSize: '24px 24px'
-                        }}
-                    />
-
+                <main className="relative flex flex-1 items-center justify-center bg-background-light px-6 py-10 dark:bg-background-dark">
                     {outlet || (
-                        <div className="m-auto w-full max-w-md p-8 text-center animate-fade-in">
-                            <div className="mx-auto mb-6 flex size-24 items-center justify-center rounded-3xl bg-primary/10 text-primary dark:bg-primary/20">
+                        <div className="w-full max-w-xl space-y-6 rounded-2xl border border-border-light/60 bg-surface-light/70 p-10 text-center shadow-soft backdrop-blur dark:border-border-dark/60 dark:bg-surface-dark/70 animate-fade-in">
+                            <div className="mx-auto flex size-24 items-center justify-center rounded-3xl bg-primary/10 text-primary dark:bg-primary/20">
                                 <span className="material-symbols-outlined text-5xl">chat_bubble_outline</span>
                             </div>
-                            <h2 className="text-2xl font-bold text-text-primary-light dark:text-text-primary-dark mb-2">
-                                Welcome to Chat
-                            </h2>
-                            <p className="text-text-secondary-light dark:text-text-secondary-dark mb-8">
-                                Select a conversation from the sidebar or create a new room to start messaging.
-                            </p>
+                            <div className="space-y-2">
+                                <h2 className="text-2xl font-bold text-text-primary-light dark:text-text-primary-dark">
+                                    Welcome to Chat
+                                </h2>
+                                <p className="text-text-secondary-light dark:text-text-secondary-dark">
+                                    Select a conversation from the sidebar or create a new room to start messaging.
+                                </p>
+                            </div>
                             <Button
                                 variant="secondary"
                                 onClick={() => setIsCreating(true)}

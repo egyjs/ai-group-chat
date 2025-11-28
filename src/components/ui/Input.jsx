@@ -1,13 +1,15 @@
 import React, { forwardRef } from 'react';
 
-const Input = forwardRef(({
+const Input = forwardRef(({ 
     label,
     error,
     icon,
     className = '',
     containerClassName = '',
+    helperText,
     ...props
 }, ref) => {
+    const describedById = helperText ? `${props.id || 'input'}-helper` : undefined;
     return (
         <div className={`w-full ${containerClassName}`}>
             {label && (
@@ -37,11 +39,16 @@ const Input = forwardRef(({
                         }
                         ${className}
                     `}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={describedById}
                     {...props}
                 />
             </div>
             {error && (
                 <p className="mt-1 text-xs text-danger animate-fade-in">{error}</p>
+            )}
+            {helperText && !error && (
+                <p id={describedById} className="mt-1 text-xs text-text-muted-light dark:text-text-muted-dark">{helperText}</p>
             )}
         </div>
     );

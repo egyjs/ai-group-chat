@@ -11,11 +11,11 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--color-background-light);
-  color: var(--color-text-light);
+  color: var(--color-text-primary-light);
 }
 
 html.dark,
 html.dark body {
   background-color: var(--color-background-dark);
-  color: var(--color-text-dark);
+  color: var(--color-text-primary-dark);
 }
