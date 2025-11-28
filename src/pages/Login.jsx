@@ -1,5 +1,5 @@
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
@@ -7,19 +7,21 @@ import Card from "../components/ui/Card";
 export default function Login() {
     const { loginWithGoogle, currentUser } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [isAuthenticating, setIsAuthenticating] = useState(false);
+    const redirectPath = location.state?.from?.pathname || "/";
 
     useEffect(() => {
         if (currentUser) {
-            navigate("/");
+            navigate(redirectPath, { replace: true });
         }
-    }, [currentUser, navigate]);
+    }, [currentUser, navigate, redirectPath]);
 
     const handleLogin = async () => {
         setIsAuthenticating(true);
         try {
             await loginWithGoogle();
-            navigate("/");
+            navigate(redirectPath, { replace: true });
         } catch (error) {
             console.error("Failed to log in", error);
             setIsAuthenticating(false);
