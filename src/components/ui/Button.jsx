@@ -1,10 +1,10 @@
 import React from 'react';
 
 const variants = {
-    primary: 'bg-primary hover:bg-primary-hover text-white shadow-soft hover:shadow-soft-lg',
-    secondary: 'bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-text-primary-light dark:text-text-primary-dark hover:bg-surface-hover dark:hover:bg-surface-hover-dark',
-    ghost: 'bg-transparent hover:bg-surface-hover dark:hover:bg-surface-hover-dark text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark',
-    danger: 'bg-danger text-white hover:bg-red-600',
+    primary: 'bg-primary hover:bg-primary-hover text-white shadow-soft hover:shadow-soft-lg focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:outline-none',
+    secondary: 'bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-text-primary-light dark:text-text-primary-dark hover:bg-surface-hover dark:hover:bg-surface-hover-dark focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:outline-none',
+    ghost: 'bg-transparent hover:bg-surface-hover dark:hover:bg-surface-hover-dark text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:outline-none',
+    danger: 'bg-danger text-white hover:bg-red-600 focus-visible:ring-2 focus-visible:ring-red-200 focus-visible:outline-none',
 };
 
 const sizes = {

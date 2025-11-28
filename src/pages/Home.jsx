@@ -90,7 +90,8 @@ export default function Home() {
 
     return (
         <div className="relative flex h-screen min-h-screen w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark font-sans">
-            <div className="flex h-full w-full">
+            <div className="absolute inset-0 bg-dot-grid-light opacity-[0.04] dark:bg-dot-grid-dark dark:opacity-[0.08]" aria-hidden />
+            <div className="flex h-full w-full relative">
                 {/* Sidebar */}
                 <aside className="flex h-full w-full max-w-sm flex-shrink-0 flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
                     <div className="flex h-full flex-col">
@@ -230,14 +231,9 @@ export default function Home() {
                 </aside>
 
                 {/* Main Content Area */}
-                <main className="flex flex-1 overflow-hidden bg-background-light dark:bg-background-dark relative">
+                <main className="flex flex-1 overflow-hidden bg-background-light/80 dark:bg-background-dark/80 relative backdrop-blur">
                     {/* Background Pattern */}
-                    <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
-                        style={{
-                            backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)',
-                            backgroundSize: '24px 24px'
-                        }}
-                    />
+                    <div className="absolute inset-0 bg-dot-grid-light opacity-[0.04] dark:bg-dot-grid-dark dark:opacity-[0.07] pointer-events-none" aria-hidden />
 
                     {outlet || (
                         <div className="m-auto w-full max-w-md p-8 text-center animate-fade-in">

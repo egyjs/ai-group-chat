@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { deleteMessage, getRoom, markRoomAsRead, sendMessage, subscribeToMessages, subscribeToRoom, subscribeToRoomMockMessages, updateMessage } from '../services/firestore';
+import { deleteMessage, markRoomAsRead, sendMessage, subscribeToMessages, subscribeToRoom, subscribeToRoomMockMessages, updateMessage } from '../services/firestore';
 import { uploadFile } from '../services/storage';
 import { createAvatarUrl } from '../utils/avatar';
 import Button from '../components/ui/Button';
@@ -188,7 +188,8 @@ export default function ChatRoom() {
     }
 
     return (
-        <div className="flex h-full w-full bg-background-light font-sans text-text-primary-light dark:bg-background-dark dark:text-text-primary-dark">
+        <div className="relative flex h-full w-full overflow-hidden bg-background-light font-sans text-text-primary-light dark:bg-background-dark dark:text-text-primary-dark">
+            <div className="pointer-events-none absolute inset-0 bg-dot-grid-light opacity-[0.03] dark:bg-dot-grid-dark dark:opacity-[0.06]" aria-hidden />
             <main className="flex h-full flex-1 flex-col relative">
                 {/* Header */}
                 <header className="flex items-center justify-between border-b border-border-light bg-surface-light/95 px-6 py-3 backdrop-blur-sm dark:border-border-dark dark:bg-surface-dark/95 z-10">
@@ -236,7 +237,9 @@ export default function ChatRoom() {
                 </header>
 
                 {/* Messages Area */}
-                <section className="flex-1 space-y-6 overflow-y-auto px-4 py-6 scroll-smooth">
+                <section className="relative flex-1 space-y-6 overflow-y-auto px-4 py-6 scroll-smooth">
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-surface-light/30 to-transparent dark:via-surface-dark/30" aria-hidden />
+                    <div className="relative mx-auto max-w-5xl space-y-6">
                     {messages.map((message, index) => {
                         const isMe = message.senderId === currentUser?.uid;
                         const repliedMessage = message.replyTo ? messagesById[message.replyTo] : null;
@@ -331,6 +334,7 @@ export default function ChatRoom() {
                         );
                     })}
                     <div ref={messagesEndRef} />
+                    </div>
                 </section>
 
                 {/* Composer */}
@@ -371,6 +375,7 @@ export default function ChatRoom() {
                                 rows={1}
                                 value={newMessage}
                                 onChange={(event) => setNewMessage(event.target.value)}
+                                aria-label={`Message ${room.name}`}
                                 onKeyDown={(event) => {
                                     if (event.key === 'Enter' && !event.shiftKey) {
                                         event.preventDefault();

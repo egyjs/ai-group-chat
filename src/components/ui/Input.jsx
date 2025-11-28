@@ -1,17 +1,23 @@
 import React, { forwardRef } from 'react';
 
-const Input = forwardRef(({
+const Input = forwardRef(({ 
     label,
     error,
     icon,
     className = '',
     containerClassName = '',
+    id,
     ...props
 }, ref) => {
+    const inputId = id || props.name || undefined;
+    const describedBy = error && inputId ? `${inputId}-error` : undefined;
     return (
         <div className={`w-full ${containerClassName}`}>
             {label && (
-                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-text-secondary-light dark:text-text-secondary-dark">
+                <label
+                    className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-text-secondary-light dark:text-text-secondary-dark"
+                    htmlFor={inputId}
+                >
                     {label}
                 </label>
             )}
@@ -25,9 +31,12 @@ const Input = forwardRef(({
                 )}
                 <input
                     ref={ref}
+                    id={inputId}
+                    aria-invalid={Boolean(error)}
+                    aria-describedby={describedBy}
                     className={`
                         w-full rounded-lg border bg-transparent px-3 py-2 text-sm text-text-primary-light dark:text-text-primary-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark
-                        focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20
+                        focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25
                         disabled:cursor-not-allowed disabled:opacity-50
                         transition-all duration-200
                         ${icon ? 'pl-10' : ''}
@@ -41,7 +50,7 @@ const Input = forwardRef(({
                 />
             </div>
             {error && (
-                <p className="mt-1 text-xs text-danger animate-fade-in">{error}</p>
+                <p id={describedBy} className="mt-1 text-xs text-danger animate-fade-in">{error}</p>
             )}
         </div>
     );

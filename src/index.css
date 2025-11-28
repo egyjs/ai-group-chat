@@ -110,3 +110,15 @@
     opacity: 1;
   }
 }
+
+@layer utilities {
+  .bg-dot-grid-light {
+    background-image: radial-gradient(theme('colors.slate.400') 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-dot-grid-dark {
+    background-image: radial-gradient(theme('colors.slate.600') 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
