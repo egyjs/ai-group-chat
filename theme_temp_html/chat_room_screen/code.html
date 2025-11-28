@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chat Room - Project Phoenix</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a242e",
+              "text-light": "#2c3e50",
+              "text-dark": "#e1e8ed",
+              "text-secondary-light": "#6b7280",
+              "text-secondary-dark": "#9dabb9",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="flex h-screen w-full">
+<!-- Left Sidebar -->
+<aside class="flex flex-col w-64 bg-surface-light dark:bg-surface-dark/50 border-r border-gray-200 dark:border-white/10">
+<div class="flex flex-col gap-4 p-4 h-full">
+<div class="flex gap-3 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Project Phoenix Logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJ9O0sSVSd_bONGwoIkXewyZkklDT540ARbzlC3KO0yKU4AjD07XZGO6mfvL-tNJUtzM1qiWvVIQgGrRFvODqFUROAX6p5dyAU9llohQTnMun-e-TCYKHTxNvXD9vzbPiciRgCk1RgKm-Okja6_01Ona40iPySP-pQPld7Buw5DAFTHMbzbthgJdP6S1-KJEG8VS-b72wUewFqfPuaEv5ZYCePKCYhX-T4wdxeh_L2RHHFGdc6B8aAnbvroPXdH9lhnyJ5Jz9mK3M");'></div>
+<div class="flex flex-col">
+<h1 class="text-text-light dark:text-text-dark text-base font-medium leading-normal">Project Phoenix</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Acme Corporation</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined text-2xl">home</span>
+<p class="text-sm font-medium leading-normal">Home</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+<p class="text-sm font-medium leading-normal">All Threads</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl fill">alternate_email</span>
+<p class="text-sm font-medium leading-normal">Direct Messages</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined text-2xl">send</span>
+<p class="text-sm font-medium leading-normal">Drafts &amp; Sent</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-white/10" href="#">
+<span class="material-symbols-outlined text-2xl">more_horiz</span>
+<p class="text-sm font-medium leading-normal">More</p>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
+<span class="truncate">New Message</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Chat Area -->
+<main class="flex-1 flex flex-col h-screen">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 py-3 border-b border-gray-200 dark:border-white/10 bg-surface-light dark:bg-surface-dark">
+<div class="flex items-center gap-3">
+<h2 class="text-xl font-bold text-text-light dark:text-text-dark">#general-discussion</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 ring-2 ring-surface-light dark:ring-surface-dark" data-alt="Avatar of Liam Carter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD42D9r61QQ7j3REpAo59h1lTzlv2yZBCJeZGVSIrBx75OVhNIO3ORe0S1jQwRBpM1qyZv-9BoW7MOAjlg-29o9yDBSss2W_NIWO_T7MN1Eye9Cziy5gKPz_or3AULLKRr7TIfnoJlLCoo0uKa-yEnwg-mwqvlQVgR8Qr6tE4OafmRvpp2m1w63e_sg-eEDGnxgJ9Wc35OFUSzfSUVeS_bZB4Oo40AiwUZWqzLW7nHrVbXs3G464prFvpIMDlkKF9Nn7XJCbNiqRCg");'></div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 ring-2 ring-surface-light dark:ring-surface-dark" data-alt="Your avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqUv7z6Gq6rzXHZYlc18rSRhVTsLncnXQ63ND-0Bbf4IT5BPbxrOk1lKBFhKvn2HJyp9-C3j9xMrcGApcjn7YH8FCO1OQXj81pLzUoNBQSaZuBlk9z3bj1mVKJFrxqNqjky6eNOw0sYdKaS7HVPUIweU935h6PWHRNDPc6keGgCcBcwZ4Ki7F22IcHNxQg1EmJHtm5jl-VIHuD8k2W52aDMdTRXuLjIwQ287C05dOM0uz1MdXfuieFATHAgqImlA0lhqAo_kF-W24");'></div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 ring-2 ring-surface-light dark:ring-surface-dark" data-alt="Avatar of Ava Rodriguez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBQGLrDyyOfgv4L96l5Lv1SXcDOI8LHAzTZSM2eyM91tjluWWDPqsqHGPfY7HiXyETQhwL2Z-CydCs9yG5bvSQGXS1dScHb55H_bFACSfq-S2GCUopmeFLrlo5xRG6P6D8b_ATHqw2EuSOY0spFRcvPmB4hIA1_OHj7ai_d1P6A7xvI0kdj41WaXvAxLIFYeV6FGFp_YrtiTh261i9GQu2UmLRSuDsKoj6pogkByYwTfWIsLTibBkGs8xCLJOazUIHMpbQn1cpzpVM");'></div>
+<div class="flex items-center justify-center size-8 bg-gray-200 dark:bg-gray-700 rounded-full ring-2 ring-surface-light dark:ring-surface-dark text-xs font-semibold text-text-secondary-light dark:text-text-secondary-dark">+5</div>
+</div>
+<button class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-2xl">group</span>
+</button>
+<button class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-9 px-3 bg-primary text-white text-sm font-medium leading-normal hover:bg-primary/90">
+<span class="material-symbols-outlined text-xl">person_add</span>
+<span class="truncate">Invite</span>
+</button>
+</div>
+</header>
+<!-- Message Stream -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Message Group 1 -->
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 flex-shrink-0" data-alt="Avatar of Liam Carter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAepb5Yss2wmiGNUzqdg0oElxV4KvU5zYvfyH779J0L2xmR63hDlQ2-4FHw98EvB6s_hxULqG8UDsBHy9MlQdMKhu5XKjpYRNo612Hd8LY_mabGb9dnqkU5QxP5qUFn5ihxDUIjgRjcPgIw3VoY99GRU8Ged6iPrfLKMsogf5h4Q8rz9I9BSKdGyY97y1DJ0xyiyC4PKaPzaZ37wMzZJ-H0hINhSmuq69i6e5gKNxTgOCfXPkiICx-YL45MRd5IMgXpL_xBGa64jnw");'></div>
+<div class="flex flex-1 flex-col items-stretch gap-2">
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-3">
+<p class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Liam Carter</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">10:30 AM</p>
+</div>
+<p class="text-text-light dark:text-text-dark text-base font-normal leading-normal">Morning team! Just wanted to share the latest mockups. Let me know what you think.</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-video bg-cover rounded-lg w-full max-w-[360px]" data-alt="Latest UI mockups showing a dashboard design" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCf3q5jKPGqA7podM6sCgvjgyPr7yXR6Sw6YWaXfmI8inT6IP5p1r15IvCAmpbEPg0OyU1DBFRVxeMbfNh28hPTkMua5bZQVMzS12c4OjWe4HbfmDFIcVqOgUGklMN7qj-ZWlN2P31pemU01h91uX2uFuKWoJcMKZID7ZGEHijeHxgj7OO3uK3XXnfT6MOPke27g0wAcy45xRzNjBTdkG-rhBseFP8A15XmqfG-A86bi_2HhpTPdTiLCniZ6Ru0yEWT4LDBNzrpMRA");'></div>
+</div>
+</div>
+<!-- Message Group 2 (Your Message) -->
+<div class="flex justify-end">
+<div class="flex flex-col gap-1 items-end max-w-xl">
+<p class="text-base font-normal leading-normal flex rounded-xl rounded-br-lg px-4 py-3 bg-primary text-white">Looks great, <span class="font-semibold bg-primary/20 text-white rounded px-1 mx-1">@Liam</span>! I'll review them in detail this afternoon and leave some comments on Figma. The new color palette is a huge improvement.</p>
+<div class="flex items-center gap-1 text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-base fill">done_all</span>
+<p class="text-xs">Read 10:31 AM</p>
+</div>
+</div>
+</div>
+<!-- Message Group 3 -->
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 flex-shrink-0" data-alt="Avatar of Ava Rodriguez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAkiB4JoOakhL51or1EP17XRlm8_whCZUTbs0nXWUxAiF5OL8aH0zlqMfcBIJnhbwr7RE-fFv2HnkKrjKHniS7rpKvxLdGZwZzXBP0tUZZSkx51q2kG6Eb-SWdO3EwZc5q5PFz164wBpIdVxj3AMJ7knhkl64wYnS11ld-Tr3t0EiPawIyS5tjqYcDvZj9r9xnXjH2K3oIeNyQBpXA5Kg1DsFt_LCMeB36BAn6e0mAySOWY9A5HRB7AtQdGDqxzrXVD72iNFb0mAdI");'></div>
+<div class="flex flex-1 flex-col items-stretch gap-1">
+<div class="flex flex-wrap items-center gap-3">
+<p class="text-text-light dark:text-text-dark text-base font-bold leading-tight">Ava Rodriguez</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">10:33 AM</p>
+</div>
+<p class="text-text-light dark:text-text-dark text-base font-normal leading-normal">Agreed, these are fantastic!</p>
+</div>
+</div>
+<!-- System Message -->
+<div class="flex items-center gap-4 my-4">
+<hr class="flex-grow border-gray-200 dark:border-white/10"/>
+<span class="text-text-secondary-light dark:text-text-secondary-dark text-sm">Noah joins the channel</span>
+<hr class="flex-grow border-gray-200 dark:border-white/10"/>
+</div>
+</div>
+<!-- Composer -->
+<footer class="p-6 pt-2">
+<div class="text-sm text-text-secondary-light dark:text-text-secondary-dark h-5 mb-1">
+<!-- Typing Indicator Area -->
+<p class="italic">Ava is typing...</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/10 rounded-xl p-2 flex flex-col">
+<!-- Autocomplete Popover (hidden by default) -->
+<div class="border-b border-gray-200 dark:border-white/10 mb-2 p-2">
+<p class="text-sm font-semibold mb-2">Mention someone</p>
+<div class="space-y-1">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJ8-y9ZSbRkELZ8_-KGSigS4I8BE-MymBKhLvgPAG3uf8gF4vCgNAQnYazKLyD9nq9iWiDJ4cuZKa4o3G9ndCSzJZ_JfaQdoR1Ye3aNV40qS5RDuiHB81mqaCsYCo07BS6xJ4KJLeL6EeemPbjxL4rJxHGP4ezCSaKWuA3mFwSEXVkJaLf6zZfp5FpoTCor5Xex2t1bajcRW0JGyoVkR7yWrC19cYIaAAg3LoR7CrY1rFreAdMEsYEY20UA7RFg86fyy_y6DxnrQs");'></div>
+<p class="font-medium">Liam Carter</p>
+</div>
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJ8-y9ZSbRkELZ8_-KGSigS4I8BE-MymBKhLvgPAG3uf8gF4vCgNAQnYazKLyD9nq9iWiDJ4cuZKa4o3G9ndCSzJZ_JfaQdoR1Ye3aNV40qS5RDuiHB81mqaCsYCo07BS6xJ4KJLeL6EeemPbjxL4rJxHGP4ezCSaKWuA3mFwSEXVkJaLf6zZfp5FpoTCor5Xex2t1bajcRW0JGyoVkR7yWrC19cYIaAAg3LoR7CrY1rFreAdMEsYEY20UA7RFg86fyy_y6DxnrQs");'></div>
+<p class="font-medium">Ava Rodriguez</p>
+</div>
+</div>
+</div>
+<div class="flex items-end gap-2">
+<textarea class="flex-1 bg-transparent resize-none p-2 focus:ring-0 border-none placeholder-text-secondary-light dark:placeholder-text-secondary-dark" placeholder="Message #general-discussion" rows="1"></textarea>
+<button class="p-2 rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-100 dark:hover:bg-white/10">
+<span class="material-symbols-outlined text-2xl">add_reaction</span>
+</button>
+<button class="p-2 rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-100 dark:hover:bg-white/10">
+<span class="material-symbols-outlined text-2xl">attach_file</span>
+</button>
+<button class="flex items-center justify-center size-9 bg-primary text-white rounded-full hover:bg-primary/90 disabled:bg-primary/50" disabled="">
+<span class="material-symbols-outlined text-2xl">send</span>
+</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- Right Sidebar (Participants) -->
+<aside class="w-80 flex-shrink-0 border-l border-gray-200 dark:border-white/10 bg-surface-light dark:bg-surface-dark/50 flex flex-col">
+<div class="p-6 border-b border-gray-200 dark:border-white/10">
+<h3 class="font-bold text-lg">Participants (8)</h3>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Members in #general-discussion</p>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-1">
+<!-- Participant List Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-black/10 group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Avatar of Liam Carter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDm1UKaASiNzPt-XFSOf7LFn2z81Ke2YSM4q-G7e9L6S6QV0WOD_bq_TcW2_dbfGeP6hLQ0qyd6pyQq-VuQRbaPaHBLvTRt951SJo5xE11Zm4Vp1OcAYr7uw_5s71oPt_gfgGMDuvhtYvl-rzJjJCShxvEtBDdS5S-SeT1WdgNcJc8x45qkliatzMHpt8IoJ8V1HXrhPH05D8rYi8yh_OVwwSIlSiNciZCqqyUnb_OGJZoJNCZgxs-KvbEkFTwUoqnETymoF5qM-E8");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-surface-light dark:border-surface-dark rounded-full"></div>
+</div>
+<div>
+<p class="font-semibold">Liam Carter</p>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Admin</p>
+</div>
+</div>
+<button class="p-2 rounded-full opacity-0 group-hover:opacity-100 text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-200 dark:hover:bg-white/20">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+<!-- Participant List Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-black/10 group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Avatar of Ava Rodriguez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvk-ypl-XvyKLJnx8btx2Vxb5IwCIqKXUnwBVKEjQc8UkxOQTZj4YwWsfO-ztNXyOaUpKnxmlqpHl1jD1r-M23shbcqdu5gK3N5PLIF5kcFQJ2h-MsfopB2-TMy6hmpuekb44yG6cX0bG_oxo9tAJgVgfTroptShs2cxLH_rX9PV0W6fxULWmCCtYlqeA1e3bO7OWke2hFqp7Swt1D0WLoJshqYJcuIz5JlVHQFZw4hoeyxH77OhkrOc2ltNX2ZsnUH9O3rllkqW4");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-surface-light dark:border-surface-dark rounded-full"></div>
+</div>
+<div>
+<p class="font-semibold">Ava Rodriguez</p>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Moderator</p>
+</div>
+</div>
+<button class="p-2 rounded-full opacity-0 group-hover:opacity-100 text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-200 dark:hover:bg-white/20">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+<!-- Participant List Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-black/10 group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Your avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDo5ViS9qOeir4VaRa5otojHy9osO5EYRK3O-TT-s8Wd5jaJhFZnh9LEirNF3dgjIGCUJyz-XzKEHbhxGf2A0MoeGe-dpqUHwLAUqQvYImLrl-3yLWGXaXYRizgvn31CHC-f92JoGuQWH5zlKMonYkvuUEfzgv-peWH4e6Z5iTlLGVsNy7s1qcEoEJeKbbt4_ZKl1HsBpDMdbIzTn06GXTP2k8GIKUFIE3WSTonE5gUA-eiElvQa4Hs3XGFEa391pr7MVyWnNTl0A");'></div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-surface-light dark:border-surface-dark rounded-full"></div>
+</div>
+<div>
+<p class="font-semibold">You</p>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Member</p>
+</div>
+</div>
+</div>
+<!-- Participant List Item -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-black/10 group">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Avatar of Noah" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAjgfWy9c4BPSeRhRReDd0nhIhYRnTxsa1vlKx2d1oFBJrzcV0flAAW_KDBgo4OiyA3KHU3qEIvSLVhtS9nHGjSYFsHM15s0TI5t_bVlBcn7kRfO9AHmBBPiYr4Aih-TfvKAI_E1pQcK-KdT6ZegWPvQFmn_yNud9iCUe-9exicBTNB9fgvSsHXxYufKp7PXTcbzeer9bRzWrISTrbeZEj-U5dZpGJ86EAoZcxBnDeqSfkYJwyiEVnHS7OPXo-seeHBfKilTLICgak");'></div>
+</div>
+<div>
+<p class="font-semibold">Noah Chen</p>
+<p class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Member</p>
+</div>
+</div>
+<button class="p-2 rounded-full opacity-0 group-hover:opacity-100 text-text-secondary-light dark:text-text-secondary-dark hover:bg-gray-200 dark:hover:bg-white/20">
+<span class="material-symbols-outlined text-xl">more_vert</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

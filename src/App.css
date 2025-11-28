@@ -1,0 +1,21 @@
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+}
+
+html.dark,
+html.dark body {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
+}

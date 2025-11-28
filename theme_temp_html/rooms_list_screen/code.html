@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chat Rooms List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-screen min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex h-full w-full">
+<!-- Left Rail -->
+<aside class="flex h-full w-full max-w-sm flex-shrink-0 flex-col border-r border-slate-200/10 dark:border-slate-800/50 bg-white dark:bg-[#19222c]">
+<div class="flex h-full flex-col justify-between">
+<div class="flex flex-col">
+<!-- Search Bar -->
+<div class="sticky top-0 z-10 p-4 bg-white dark:bg-[#19222c]">
+<label class="flex flex-col min-w-40 h-10 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-500 dark:text-slate-400 flex border-none bg-slate-100 dark:bg-background-dark items-center justify-center pl-3 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-base">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-background-dark h-full placeholder:text-slate-500 dark:placeholder:text-slate-400 px-2 text-sm font-normal" placeholder="Search for people or rooms" value=""/>
+</div>
+</label>
+</div>
+<!-- Room List -->
+<div class="flex flex-col overflow-y-auto px-2">
+<!-- Active Chat Item -->
+<div class="flex cursor-pointer items-center gap-3 bg-primary/10 dark:bg-primary/20 p-2 rounded-lg">
+<div class="relative shrink-0">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="Avatar of Alissa Cheetah" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmpBAKMH6U_942vmLbGtHdSlRG0BIhrM2YU1EVY9KivFyiFqbhZMb-ilQ6aF7EA97kwqR5TjT50gctnLhxqWW6Vf0zOZSjpWgr03AxVuhc4M0-urxIDb4zkuIioGoflkvG3HkfP0zatHTkuQWPON2s_m6GaKT0yKRD-XpaftykKKVlTYQ1GViYFFagvlyNRtPyiYjbS91O60-fXa6e8uM1R_5IhNGuo5OTtjYDDtTACDZPTNiq3B2eAytoUcwqtscJxeTC_mihbgQ");'></div>
+<div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 border-2 border-white dark:border-[#19222c]"></div>
+</div>
+<div class="flex-grow overflow-hidden">
+<div class="flex justify-between items-baseline">
+<p class="text-slate-900 dark:text-white text-sm font-semibold leading-normal truncate">Alissa Cheetah</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">5m ago</p>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm font-normal leading-normal truncate">Sounds good! I'll be there.</p>
+</div>
+<div class="shrink-0">
+<div class="flex size-6 items-center justify-center rounded-full bg-primary text-white text-xs font-semibold">2</div>
+</div>
+</div>
+<!-- Chat Item -->
+<div class="flex cursor-pointer items-center gap-3 hover:bg-slate-100 dark:hover:bg-background-dark p-2 rounded-lg">
+<div class="relative shrink-0">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 flex items-center justify-center bg-purple-500 text-white font-bold text-lg" data-alt="Avatar for Design Team">DT</div>
+</div>
+<div class="flex-grow overflow-hidden">
+<div class="flex justify-between items-baseline">
+<p class="text-slate-900 dark:text-white text-sm font-semibold leading-normal truncate">Design Team</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">1h ago</p>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm font-normal leading-normal truncate">Michael: Let's sync on this tomorrow.</p>
+</div>
+<div class="shrink-0">
+<div class="flex size-6 items-center justify-center rounded-full bg-primary text-white text-xs font-semibold">5</div>
+</div>
+</div>
+<!-- Chat Item -->
+<div class="flex cursor-pointer items-center gap-3 hover:bg-slate-100 dark:hover:bg-background-dark p-2 rounded-lg">
+<div class="relative shrink-0">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="Avatar of Bernardo Agrolongo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmh2au-3C7vFKeeBfYCQowtTDusNnNnvN5gOuIuaK90Ht_4pmWtSRZIJH43vFPWru2SpqGlsAfi3onaoy1Rc2M3OTkqpokZzOxSLB49KOLIMVAYkvYHnfGSGFeUxVU590HruN7mCHuIYuXwVEGjVfhJ-OQZNplrMy-My2uEKFUepeptR3tpfoNJnOXCrmubIIIAEHqge15_QmILdNMM_zcsSd0GlZ8GwGIiMyLf4bs_PPkRXPd6aTkmLz666__Es8TaMxNsSf2PvI");'></div>
+<div class="absolute bottom-0 right-0 size-3 rounded-full bg-slate-400 border-2 border-white dark:border-[#19222c]"></div>
+</div>
+<div class="flex-grow overflow-hidden">
+<div class="flex justify-between items-baseline">
+<p class="text-slate-900 dark:text-white text-sm font-semibold leading-normal truncate">Bernardo Agrolongo</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">Yesterday</p>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm font-normal leading-normal truncate">Can you review the latest proposal?</p>
+</div>
+</div>
+<!-- Chat Item -->
+<div class="flex cursor-pointer items-center gap-3 hover:bg-slate-100 dark:hover:bg-background-dark p-2 rounded-lg">
+<div class="relative shrink-0">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 flex items-center justify-center bg-orange-500 text-white font-bold text-lg" data-alt="Avatar for Engineering">E</div>
+</div>
+<div class="flex-grow overflow-hidden">
+<div class="flex justify-between items-baseline">
+<p class="text-slate-900 dark:text-white text-sm font-semibold leading-normal truncate">Engineering</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">Yesterday</p>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm font-normal leading-normal truncate">Sarah: The PR has been merged.</p>
+</div>
+</div>
+<!-- Chat Item -->
+<div class="flex cursor-pointer items-center gap-3 hover:bg-slate-100 dark:hover:bg-background-dark p-2 rounded-lg">
+<div class="relative shrink-0">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" data-alt="Avatar of Maria Garcia" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDgoOyRRwK0Jl8izCUelnoAKQjSUmwtIGayPQcRnXzdQoC25qJZ9yudGTIeYHeEnLMEc57lMS1Fnvw8LNyTRhscwrEI2zSHIb_0j2v2ZmSitjzXpel2qZ_KMadrpfUgWxXAjWAes5VW9KVjDjqpDAgD2pOiquAAFK7rm_-CzaDdZQtTU_i7_m9jnFOU2xYj5ya4ayfJEWSJq1NZNlXRlHZwJQDVGqF1UPVW9eGNKqBUU0N1Xt9V5a-rh5MEXrMP-R7nzLOyj8C1d-o");'></div>
+<div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 border-2 border-white dark:border-[#19222c]"></div>
+</div>
+<div class="flex-grow overflow-hidden">
+<div class="flex justify-between items-baseline">
+<p class="text-slate-900 dark:text-white text-sm font-semibold leading-normal truncate">Maria Garcia</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">2d ago</p>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-sm font-normal leading-normal truncate">Haha, that's hilarious! 😂</p>
+</div>
+</div>
+</div>
+</div>
+<!-- User Profile & New Chat Button -->
+<div class="sticky bottom-0 z-10 p-4 bg-white dark:bg-[#19222c] border-t border-slate-200/10 dark:border-slate-800/50">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Avatar of Adrian Smith" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrZASKh4S84psUoCMgUaRAVrGgTnQ7xxU1oOqTqwUE1K_uD5-wxdf669cLwwbfv-oQe7uS_LNt9orDKLCgUOx5rGNXo90xvDIobaKWG0ha3nA47ejUIJoqVRwZU2nPQqRm92BA4tAN7fwH1WcJTL6RlW3dZsuDdmR5Oz4J37sL537w3WjPwUlZwfJ837tm5osofRZf04w3cyq_hurP9R-4Vw5uoIyXOz77A9ocLq3Nh-klcmZr8aheheTwOt-E8zVktfPVJ1-kWGo");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-sm font-semibold">Adrian Smith</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Online</p>
+</div>
+</div>
+<button class="flex min-w-[40px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-primary text-white">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area (Placeholder) -->
+<main class="flex-1 bg-background-light dark:bg-background-dark p-6">
+<div class="flex flex-col items-center justify-center h-full text-center border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl">
+<span class="material-symbols-outlined text-6xl text-slate-400 dark:text-slate-600">chat</span>
+<h2 class="mt-4 text-xl font-semibold text-slate-800 dark:text-slate-200">Select a chat to start messaging</h2>
+<p class="mt-1 text-slate-500 dark:text-slate-400">Your conversations will appear here.</p>
+</div>
+</main>
+</div>
+</div>
+</body></html>

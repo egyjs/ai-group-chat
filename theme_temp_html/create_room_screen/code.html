@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create New Room</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col">
+<div class="flex h-full grow flex-col">
+<div class="flex flex-1 justify-center p-4 sm:p-6 md:p-10">
+<div class="flex w-full max-w-2xl flex-col">
+<!-- Page Heading -->
+<div class="flex flex-wrap items-center justify-between gap-3 pb-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">Create a New Room</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Fill in the details below to start a new conversation.</p>
+</div>
+</div>
+<!-- Form Card -->
+<div class="flex flex-col gap-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 p-6">
+<!-- Room Name -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-900 dark:text-white text-sm font-medium" for="room-name">Room Name</label>
+<input class="form-input w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-2.5 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-primary focus:ring-primary" id="room-name" placeholder="e.g., Q4 Project Team" type="text" value=""/>
+</div>
+<!-- Room Type -->
+<div class="flex flex-col gap-2">
+<h2 class="text-slate-900 dark:text-white text-sm font-medium">Room Type</h2>
+<div class="flex rounded-lg bg-slate-100 dark:bg-slate-800 p-1">
+<label class="flex h-9 flex-1 cursor-pointer items-center justify-center rounded-md px-2 text-sm font-medium text-slate-600 dark:text-slate-400 has-[:checked]:bg-white has-[:checked]:text-slate-900 has-[:checked]:shadow-sm dark:has-[:checked]:bg-slate-700 dark:has-[:checked]:text-white">
+<span>Group</span>
+<input checked="" class="sr-only" name="roomType" type="radio" value="Group"/>
+</label>
+<label class="flex h-9 flex-1 cursor-pointer items-center justify-center rounded-md px-2 text-sm font-medium text-slate-600 dark:text-slate-400 has-[:checked]:bg-white has-[:checked]:text-slate-900 has-[:checked]:shadow-sm dark:has-[:checked]:bg-slate-700 dark:has-[:checked]:text-white">
+<span>Direct Message</span>
+<input class="sr-only" name="roomType" type="radio" value="Direct Message"/>
+</label>
+</div>
+</div>
+<!-- Divider -->
+<hr class="border-slate-200 dark:border-slate-800"/>
+<!-- Invite Link Section -->
+<div class="flex flex-col gap-4">
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-tight">Invite Others with a Link</h3>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<input class="form-input w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 py-2 pl-4 pr-10 text-slate-500 dark:text-slate-400 text-sm" readonly="" value="https://app.chat/invite/a1b2c3d4"/>
+<button aria-label="Copy Link" class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary" type="button">
+<span class="material-symbols-outlined text-base">content_copy</span>
+</button>
+</div>
+<button aria-label="Regenerate Link" class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 hover:border-slate-400 hover:text-slate-600 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:text-slate-300" type="button">
+<span class="material-symbols-outlined text-base">refresh</span>
+</button>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-3 pt-2">
+<button class="mt-3 sm:mt-0 flex w-full items-center justify-center rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 dark:bg-slate-700 dark:text-white dark:ring-slate-600 dark:hover:bg-slate-600" type="button">Cancel</button>
+<button class="flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary/90" type="submit">Create Room</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>
