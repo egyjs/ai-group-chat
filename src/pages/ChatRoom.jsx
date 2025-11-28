@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { deleteMessage, getRoom, markRoomAsRead, sendMessage, subscribeToMessages, subscribeToRoom, subscribeToRoomMockMessages, updateMessage } from '../services/firestore';
+import { deleteMessage, markRoomAsRead, sendMessage, subscribeToMessages, subscribeToRoom, subscribeToRoomMockMessages, updateMessage } from '../services/firestore';
 import { uploadFile } from '../services/storage';
 import { createAvatarUrl } from '../utils/avatar';
 import Button from '../components/ui/Button';
@@ -116,13 +116,14 @@ export default function ChatRoom() {
     }, [room, currentUser, senderNameById]);
 
     const handleSend = async () => {
-        if (!newMessage.trim() || !currentUser) return;
+        const trimmedMessage = newMessage.trim();
+        if (!trimmedMessage || !currentUser) return;
 
         if (editingMessage) {
-            await updateMessage(editingMessage.id, newMessage);
+            await updateMessage(editingMessage.id, trimmedMessage);
             setEditingMessage(null);
         } else {
-            await sendMessage(roomId, currentUser, newMessage, [], replyTo ? replyTo.id : null);
+            await sendMessage(roomId, currentUser, trimmedMessage, [], replyTo ? replyTo.id : null);
             setReplyTo(null);
         }
         setNewMessage('');
@@ -139,6 +140,8 @@ export default function ChatRoom() {
         } catch (error) {
             console.error('File upload failed', error);
             alert('Failed to upload file');
+        } finally {
+            event.target.value = '';
         }
     };
 

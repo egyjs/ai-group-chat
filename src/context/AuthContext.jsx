@@ -4,14 +4,12 @@ import { auth } from "../services/firebase";
 
 const AuthContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
     return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-
     const bypassAuth = useMemo(() => {
         if (typeof import.meta === "undefined") return false;
         return import.meta.env?.VITE_BYPASS_AUTH === "true";
@@ -24,6 +22,9 @@ export function AuthProvider({ children }) {
         photoURL: "https://avatars.githubusercontent.com/u/9919?v=4"
     }), []);
 
+    const [currentUser, setCurrentUser] = useState(() => (bypassAuth ? fallbackDevUser : null));
+    const [loading, setLoading] = useState(!bypassAuth);
+
     function loginWithGoogle() {
         const provider = new GoogleAuthProvider();
         return signInWithPopup(auth, provider);
@@ -35,8 +36,6 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         if (bypassAuth) {
-            setCurrentUser(fallbackDevUser);
-            setLoading(false);
             return () => {};
         }
 
@@ -46,7 +45,7 @@ export function AuthProvider({ children }) {
         });
 
         return unsubscribe;
-    }, [bypassAuth, fallbackDevUser]);
+    }, [bypassAuth]);
 
     const value = {
         currentUser,

@@ -69,7 +69,8 @@ export default function Home() {
     };
 
     const filteredRooms = useMemo(() => {
-        return rooms.filter((room) => room.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        const normalizedSearch = searchTerm.toLowerCase();
+        return rooms.filter((room) => (room.name || '').toLowerCase().includes(normalizedSearch));
     }, [rooms, searchTerm]);
 
     const handleCreateRoom = async (event) => {
