@@ -27,7 +27,7 @@ const Input = forwardRef(({
                     ref={ref}
                     className={`
                         w-full rounded-lg border bg-transparent px-3 py-2 text-sm text-text-primary-light dark:text-text-primary-dark placeholder:text-text-muted-light dark:placeholder:text-text-muted-dark
-                        focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20
+                        focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus-visible:ring-primary/30 focus-visible:border-primary
                         disabled:cursor-not-allowed disabled:opacity-50
                         transition-all duration-200
                         ${icon ? 'pl-10' : ''}
@@ -37,6 +37,7 @@ const Input = forwardRef(({
                         }
                         ${className}
                     `}
+                    aria-invalid={Boolean(error)}
                     {...props}
                 />
             </div>

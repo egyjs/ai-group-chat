@@ -56,6 +56,18 @@
   }
 }
 
+@layer utilities {
+  .bg-grid-pattern {
+    --grid-color: #cbd5e1;
+    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .dark .bg-grid-pattern {
+    --grid-color: #475569;
+  }
+}
+
 /* Material Symbols settings */
 .material-symbols-outlined {
   font-variation-settings:

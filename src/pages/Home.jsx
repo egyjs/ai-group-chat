@@ -184,7 +184,9 @@ export default function Home() {
                                     variant="primary"
                                     size="icon"
                                     onClick={() => setIsCreating((prev) => !prev)}
-                                    className="rounded-full shadow-lg shadow-primary/20"
+                                    className="shadow-lg shadow-primary/20"
+                                    aria-label={isCreating ? 'Close room creator' : 'Open room creator'}
+                                    aria-pressed={isCreating}
                                 >
                                     <span className="material-symbols-outlined text-xl">{isCreating ? 'close' : 'add'}</span>
                                 </Button>
@@ -194,6 +196,7 @@ export default function Home() {
                                     onClick={logout}
                                     className="text-text-muted-light hover:text-danger dark:text-text-muted-dark dark:hover:text-danger"
                                     title="Logout"
+                                    aria-label="Logout"
                                 >
                                     <span className="material-symbols-outlined text-xl">logout</span>
                                 </Button>
@@ -230,14 +233,9 @@ export default function Home() {
                 </aside>
 
                 {/* Main Content Area */}
-                <main className="flex flex-1 overflow-hidden bg-background-light dark:bg-background-dark relative">
+                <main className="relative flex flex-1 overflow-hidden bg-background-light dark:bg-background-dark">
                     {/* Background Pattern */}
-                    <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
-                        style={{
-                            backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)',
-                            backgroundSize: '24px 24px'
-                        }}
-                    />
+                    <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" aria-hidden="true" />
 
                     {outlet || (
                         <div className="m-auto w-full max-w-md p-8 text-center animate-fade-in">

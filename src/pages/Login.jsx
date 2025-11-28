@@ -29,12 +29,7 @@ export default function Login() {
     return (
         <div className="relative flex min-h-screen w-full flex-col items-center justify-center bg-background-light dark:bg-background-dark font-sans overflow-hidden p-4">
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
-                style={{
-                    backgroundImage: 'radial-gradient(#64748b 1px, transparent 1px)',
-                    backgroundSize: '24px 24px'
-                }}
-            />
+            <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" aria-hidden="true" />
 
             <div className="w-full max-w-md animate-slide-up relative z-10">
                 <div className="flex justify-center mb-8">
@@ -44,9 +39,9 @@ export default function Login() {
                 </div>
 
                 <Card className="p-8 backdrop-blur-sm bg-surface-light/80 dark:bg-surface-dark/80 border-primary/10 dark:border-primary/10">
-                    <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark mb-2">Welcome back</h1>
-                        <p className="text-text-secondary-light dark:text-text-secondary-dark">
+                    <div className="mb-8 text-center space-y-2">
+                        <h1 className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">Welcome back</h1>
+                        <p className="text-text-secondary-light dark:text-text-secondary-dark text-balance">
                             Sign in to access your teams and conversations.
                         </p>
                     </div>
