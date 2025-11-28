@@ -39,8 +39,9 @@ export default function JoinRoom() {
     }, [roomId, currentUser, navigate]);
 
     return (
-        <div className="flex h-screen w-full items-center justify-center bg-background-light dark:bg-background-dark font-sans">
-            <div className="flex flex-col items-center gap-4 text-center">
+        <div className="relative flex h-screen w-full items-center justify-center bg-background-light dark:bg-background-dark font-sans overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10" aria-hidden="true" />
+            <div className="relative z-10 flex flex-col items-center gap-4 text-center">
                 <span className="material-symbols-outlined animate-spin text-4xl text-primary">progress_activity</span>
                 <p className="text-lg font-medium text-text-primary-light dark:text-text-primary-dark">{status}</p>
             </div>

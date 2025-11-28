@@ -235,104 +235,106 @@ export default function ChatRoom() {
                     </div>
                 </header>
 
+
                 {/* Messages Area */}
-                <section className="flex-1 space-y-6 overflow-y-auto px-4 py-6 scroll-smooth">
-                    {messages.map((message, index) => {
-                        const isMe = message.senderId === currentUser?.uid;
-                        const repliedMessage = message.replyTo ? messagesById[message.replyTo] : null;
-                        const replyPreview = repliedMessage ? getReplyPreview(repliedMessage) : null;
+                <section className="flex-1 overflow-y-auto px-4 py-6 scroll-smooth">
+                    <div className="mx-auto flex max-w-4xl flex-col space-y-6">
+                        {messages.map((message, index) => {
+                            const isMe = message.senderId === currentUser?.uid;
+                            const repliedMessage = message.replyTo ? messagesById[message.replyTo] : null;
+                            const replyPreview = repliedMessage ? getReplyPreview(repliedMessage) : null;
 
-                        // Check if previous message was from same sender to group them visually
-                        const isSequence = index > 0 && messages[index - 1].senderId === message.senderId;
+                            // Check if previous message was from same sender to group them visually
+                            const isSequence = index > 0 && messages[index - 1].senderId === message.senderId;
 
-                        return (
-                            <div key={message.id} className={`flex gap-3 ${isMe ? 'justify-end' : ''} group animate-fade-in`}>
-                                {!isMe && (
-                                    <div className="w-10 flex-shrink-0">
-                                        {!isSequence && (
-                                            <Avatar
-                                                src={createAvatarUrl(message.senderName || 'Member')}
-                                                alt={message.senderName}
-                                                size="md"
-                                            />
-                                        )}
-                                    </div>
-                                )}
-
-                                <div className={`flex max-w-[85%] md:max-w-[70%] flex-col gap-1 ${isMe ? 'items-end' : 'items-start'}`}>
-                                    {!isSequence && (
-                                        <div className={`flex items-center gap-2 text-xs text-text-muted-light dark:text-text-muted-dark px-1 ${isMe ? 'flex-row-reverse' : ''}`}>
-                                            <span className="font-semibold text-text-primary-light dark:text-text-primary-dark">
-                                                {isMe ? 'You' : message.senderName}
-                                            </span>
-                                            <span>{formatMessageTime(message.createdAt)}</span>
+                            return (
+                                <div key={message.id} className={`group flex gap-3 ${isMe ? 'justify-end' : ''} animate-fade-in`}>
+                                    {!isMe && (
+                                        <div className="w-10 flex-shrink-0">
+                                            {!isSequence && (
+                                                <Avatar
+                                                    src={createAvatarUrl(message.senderName || 'Member')}
+                                                    alt={message.senderName}
+                                                    size="md"
+                                                />
+                                            )}
                                         </div>
                                     )}
 
-                                    <div
-                                        className={`
-                                            relative px-4 py-2.5 shadow-sm text-sm leading-relaxed break-words
-                                            ${isMe
-                                                ? 'bg-primary text-white rounded-2xl rounded-tr-sm'
-                                                : 'bg-surface-light dark:bg-surface-dark text-text-primary-light dark:text-text-primary-dark rounded-2xl rounded-tl-sm border border-border-light dark:border-border-dark'
-                                            }
-                                        `}
-                                    >
-                                        {message.replyTo && (
-                                            <div className={`mb-2 rounded-lg border px-3 py-2 text-xs ${isMe ? 'border-white/20 bg-white/10 text-white/90' : 'border-border-light bg-surface-hover/50 text-text-secondary-light dark:border-border-dark dark:bg-surface-hover-dark/50 dark:text-text-secondary-dark'}`}>
-                                                <div className="flex items-center gap-1 mb-0.5 opacity-75">
-                                                    <span className="material-symbols-outlined text-[10px]">reply</span>
-                                                    <span className="font-bold">{repliedMessage?.senderName || 'Unknown'}</span>
+                                    <div className={`flex max-w-[85%] flex-col gap-1 md:max-w-[70%] ${isMe ? 'items-end' : 'items-start'}`}>
+                                        {!isSequence && (
+                                            <div className={`flex items-center gap-2 px-1 text-xs text-text-muted-light dark:text-text-muted-dark ${isMe ? 'flex-row-reverse' : ''}`}>
+                                                <span className="font-semibold text-text-primary-light dark:text-text-primary-dark">
+                                                    {isMe ? 'You' : message.senderName}
+                                                </span>
+                                                <span>{formatMessageTime(message.createdAt)}</span>
+                                            </div>
+                                        )}
+
+                                        <div
+                                            className={`
+                                                relative break-words px-4 py-2.5 text-sm leading-relaxed shadow-sm
+                                                ${isMe
+                                                    ? 'rounded-2xl rounded-tr-sm bg-primary text-white'
+                                                    : 'rounded-2xl rounded-tl-sm border border-border-light bg-surface-light text-text-primary-light dark:border-border-dark dark:bg-surface-dark dark:text-text-primary-dark'
+                                                }
+                                            `}
+                                        >
+                                            {message.replyTo && (
+                                                <div className={`mb-2 rounded-lg border px-3 py-2 text-xs ${isMe ? 'border-white/20 bg-white/10 text-white/90' : 'border-border-light bg-surface-hover/50 text-text-secondary-light dark:border-border-dark dark:bg-surface-hover-dark/50 dark:text-text-secondary-dark'}`}>
+                                                    <div className="mb-0.5 flex items-center gap-1 opacity-75">
+                                                        <span className="material-symbols-outlined text-[10px]">reply</span>
+                                                        <span className="font-bold">{repliedMessage?.senderName || 'Unknown'}</span>
+                                                    </div>
+                                                    <p className="line-clamp-1 italic">{replyPreview || 'Message deleted'}</p>
                                                 </div>
-                                                <p className="line-clamp-1 italic">{replyPreview || 'Message deleted'}</p>
-                                            </div>
-                                        )}
+                                            )}
 
-                                        <p className="whitespace-pre-wrap">{message.text}</p>
+                                            <p className="whitespace-pre-wrap">{message.text}</p>
 
-                                        {message.isEdited && (
-                                            <span className={`text-[10px] ml-1 opacity-70 ${isMe ? 'text-white' : 'text-text-muted-light dark:text-text-muted-dark'}`}>
-                                                (edited)
-                                            </span>
-                                        )}
+                                            {message.isEdited && (
+                                                <span className={`ml-1 text-[10px] opacity-70 ${isMe ? 'text-white' : 'text-text-muted-light dark:text-text-muted-dark'}`}>
+                                                    (edited)
+                                                </span>
+                                            )}
 
-                                        {message.attachments?.map((attachment, index) => (
-                                            <div key={`${attachment.url}-${index}`} className="mt-3">
-                                                {attachment.type?.startsWith('image/') ? (
-                                                    <img src={attachment.url} alt={attachment.name} className="max-h-64 rounded-lg object-cover bg-black/5 dark:bg-white/5" />
-                                                ) : (
-                                                    <a href={attachment.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-lg bg-black/5 p-2 text-xs font-medium hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20 transition-colors">
-                                                        <span className="material-symbols-outlined text-lg">description</span>
-                                                        <span className="underline decoration-dotted">{attachment.name || 'Attachment'}</span>
-                                                    </a>
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
+                                            {message.attachments?.map((attachment, index) => (
+                                                <div key={`${attachment.url}-${index}`} className="mt-3">
+                                                    {attachment.type?.startsWith('image/') ? (
+                                                        <img src={attachment.url} alt={attachment.name} className="max-h-64 rounded-lg object-cover bg-black/5 dark:bg-white/5" />
+                                                    ) : (
+                                                        <a href={attachment.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-lg bg-black/5 p-2 text-xs font-medium transition-colors hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20">
+                                                            <span className="material-symbols-outlined text-lg">description</span>
+                                                            <span className="underline decoration-dotted">{attachment.name || 'Attachment'}</span>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
 
-                                    {/* Message Actions */}
-                                    <div className={`flex items-center gap-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${isMe ? 'flex-row-reverse' : ''}`}>
-                                        <Button variant="ghost" size="icon" className="h-6 w-6 p-0 text-text-muted-light hover:text-primary dark:text-text-muted-dark" onClick={() => setReplyTo(message)} title="Reply">
-                                            <span className="material-symbols-outlined text-base">reply</span>
-                                        </Button>
-                                        {isMe && (
-                                            <>
-                                                <Button variant="ghost" size="icon" className="h-6 w-6 p-0 text-text-muted-light hover:text-primary dark:text-text-muted-dark" onClick={() => { setEditingMessage(message); setNewMessage(message.text); }} title="Edit">
-                                                    <span className="material-symbols-outlined text-base">edit</span>
-                                                </Button>
-                                                <Button variant="ghost" size="icon" className="h-6 w-6 p-0 text-text-muted-light hover:text-danger dark:text-text-muted-dark" onClick={() => handleDelete(message.id)} title="Delete">
-                                                    <span className="material-symbols-outlined text-base">delete</span>
-                                                </Button>
-                                            </>
-                                        )}
+                                        {/* Message Actions */}
+                                        <div className={`flex items-center gap-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 ${isMe ? 'flex-row-reverse' : ''}`}>
+                                            <Button variant="ghost" size="icon" className="h-6 w-6 p-0 text-text-muted-light hover:text-primary dark:text-text-muted-dark" onClick={() => setReplyTo(message)} title="Reply" aria-label="Reply to message">
+                                                <span className="material-symbols-outlined text-base">reply</span>
+                                            </Button>
+                                            {isMe && (
+                                                <>
+                                                    <Button variant="ghost" size="icon" className="h-6 w-6 p-0 text-text-muted-light hover:text-primary dark:text-text-muted-dark" onClick={() => { setEditingMessage(message); setNewMessage(message.text); }} title="Edit" aria-label="Edit message">
+                                                        <span className="material-symbols-outlined text-base">edit</span>
+                                                    </Button>
+                                                    <Button variant="ghost" size="icon" className="h-6 w-6 p-0 text-text-muted-light hover:text-danger dark:text-text-muted-dark" onClick={() => handleDelete(message.id)} title="Delete" aria-label="Delete message">
+                                                        <span className="material-symbols-outlined text-base">delete</span>
+                                                    </Button>
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                    <div ref={messagesEndRef} />
+                            );
+                        })}
+                        <div ref={messagesEndRef} />
+                    </div>
                 </section>
-
                 {/* Composer */}
                 <footer className="border-t border-border-light bg-surface-light px-4 py-4 dark:border-border-dark dark:bg-surface-dark">
                     <div className="mx-auto max-w-4xl">
@@ -359,6 +361,7 @@ export default function ChatRoom() {
                                 onClick={() => fileInputRef.current?.click()}
                                 className="text-text-secondary-light hover:bg-surface-hover dark:text-text-secondary-dark dark:hover:bg-surface-hover-dark rounded-xl"
                                 title="Attach file"
+                                aria-label="Attach file"
                             >
                                 <span className="material-symbols-outlined text-2xl">add_circle</span>
                             </Button>
@@ -384,7 +387,8 @@ export default function ChatRoom() {
                                 disabled={!newMessage.trim()}
                                 variant="primary"
                                 size="icon"
-                                className="rounded-xl h-10 w-10 shrink-0 mb-0.5"
+                                className="h-10 w-10 shrink-0 rounded-xl mb-0.5"
+                                aria-label="Send message"
                             >
                                 <span className="material-symbols-outlined text-xl">send</span>
                             </Button>
